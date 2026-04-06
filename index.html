@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Rooms</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;800&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="styles.css"/>
+</head>
+<body>
+
+  <header>
+    <p class="eyebrow">// real-time rooms</p>
+    <h1>Drop In. <span>Link Up.</span></h1>
+    <p class="subtitle">create a room — share the code — anyone can join</p>
+  </header>
+  <div class="divider"></div>
+
+  <!-- LOBBY -->
+  <main id="lobby-view">
+    <div class="card" id="name-section">
+      <p class="card-title">your name</p>
+      <div class="input-row">
+        <input type="text" id="name-input" placeholder="what do you go by?" maxlength="24"/>
+        <button class="btn-primary" onclick="setName()">Set</button>
+      </div>
+      <p class="name-display" id="name-display" style="display:none">
+        you're <strong id="name-show"></strong> &nbsp;—&nbsp;
+        <span style="color:var(--muted);font-size:12px;cursor:pointer;text-decoration:underline" onclick="changeName()">change</span>
+      </p>
+    </div>
+
+    <div class="card">
+      <p class="card-title">create a room</p>
+      <div class="input-row">
+        <input type="text" id="room-name-input" placeholder="room name (optional)"/>
+        <button class="btn-primary" onclick="createRoom()">Create</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <p class="card-title">join a room</p>
+      <div class="input-row">
+        <input type="text" id="join-code-input" placeholder="enter room code" maxlength="6"
+          style="text-transform:uppercase;letter-spacing:0.2em"
+          onkeydown="if(event.key==='Enter') joinRoom()"/>
+        <button class="btn-primary" onclick="joinRoom()">Join</button>
+      </div>
+    </div>
+  </main>
+
+  <!-- ROOM VIEW -->
+  <main id="room-view">
+    <div class="room-header-card">
+      <div class="room-info">
+        <h2 id="room-title">Room</h2>
+        <p class="room-code-display">code: <span id="room-code-show">——</span></p>
+      </div>
+      <div class="room-actions">
+        <button class="btn-copy" id="copy-btn" onclick="copyCode()">copy code</button>
+        <button class="btn-danger" onclick="leaveRoom()">leave</button>
+      </div>
+    </div>
+
+    <div class="members-card">
+      <p class="members-title">
+        members
+        <span class="member-count" id="member-count">0</span>
+      </p>
+      <div class="members-list" id="members-list">
+        <p class="empty">no one here yet...</p>
+      </div>
+    </div>
+
+    <div class="chat-card">
+      <div class="chat-messages" id="chat-messages">
+        <p class="empty">say something 👋</p>
+      </div>
+      <div class="chat-input-row">
+        <input type="text" id="chat-input" placeholder="type a message..." maxlength="300"
+          onkeydown="if(event.key==='Enter') sendMessage()"/>
+        <button onclick="sendMessage()">Send</button>
+      </div>
+    </div>
+  </main>
+
+  <div class="toast" id="toast"></div>
+
+  <script type="module" src="script.js"></script>
+</body>
+</html>
